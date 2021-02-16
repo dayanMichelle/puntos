@@ -165,7 +165,7 @@
             }
             $cedula = (int) $cedula;
 
-            $constPunto = 27;
+            $constPunto = 55;
 
 
             $consulta = "SELECT * FROM clientes WHERE id='$cedula'";
