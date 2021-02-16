@@ -181,6 +181,9 @@
             $resultadototal = $fila[6] + $montofinal;
             $comprastales = $fila[4] + 1;
             $puntosdelcliente = $fila[5];
+            if($fila[5]==nulL){
+              $puntosdelcliente=0;
+            }
             $totalpuntos = $puntosdelcliente - $puntos_usar;
 
             $puntosAsumar = ($montofinal * 1) / 1000;
@@ -189,11 +192,12 @@
             #RODEONDEO PARA LOS PUNTOS 
             round($puntosAsumar, 0, PHP_ROUND_HALF_UP);
 
-
+          
 
             $agregar = "UPDATE clientes SET total='$resultadototal', cantidadCompras='$comprastales',puntos='$puntosfinales' WHERE id='$cedula'";
             if (!isset($_POST['Agregar'])) {
             } else {
+              
               //validacion para que el usuario no use mas puntos de los que no tiene
               if ($puntosdelcliente >= $puntos_usar) {
                 $resultado = mysqli_query($conn, $agregar);
