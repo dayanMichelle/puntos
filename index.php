@@ -55,7 +55,7 @@
         <div class="row">
           <label class="required" for="email">Numero:</label><br />
           <input id="numero" class="input" value="<?php
-                                                  if (isset($cedula)) echo $cedula ?>" name="numero" required type="text" value="" size="30" /><br />
+                                                  if (isset($cedula)) echo $cedula ?>" name="numero" required type="text" value="" size="" /><br />
           <span id="email_validation" class="error_message"></span>
         </div>
 
