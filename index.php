@@ -21,14 +21,14 @@
   <div class='container'>
 
     <section id='first'>
-    
+
       <div class="row">
         <form id="contact_form" action="buscar.php" method="POST" enctype="multipart/form-data">
           <label class="required" for="name">N° de cedula:</label><br />
           <input id="cedula_buscar" class="input" value="<?php
                                                           if (isset($cedula)) echo $cedula ?>" name="cedula_buscar" type="number" value="456789" size="30" /><br />
 
-          <input id="submit_button" type="submit" value="Buscar cliente"/>
+          <input id="submit_button" type="submit" value="Buscar cliente" />
       </div>
 
       </form>
@@ -126,7 +126,7 @@
         </div>
         <div class="contenedor">
 
-          <form id="contact_form-2" method="POST" enctype="multipart/form-data">
+          <form id="contact_form-2" action="compras.php" method="POST" enctype="multipart/form-data">
             <div class="row">
               <label class="required" for="name">N° de cedula:</label><br />
               <input id="name" class="input" value="<?php
@@ -135,8 +135,7 @@
             </div>
             <div class="row">
               <label class="required" for="name">Monto:</label><br />
-              <input id="name" class="input" value="<?php
-                                                    if (isset($monto)) echo $monto ?>" required name="monto" type="number" value="" size="30" /><br />
+              <input id="name" class="input" value="" required name="monto" type="number" value="0" size="30" /><br />
               <span id="name_validation" class="error_message"></span>
             </div>
 
@@ -144,99 +143,15 @@
 
             <div class="row">
               <label class="required" for="email">Puntos a usar:</label><br />
-              <input id="email" class="input" required name="puntos_usar" type="number" value="<?php if (isset($puntos_usar)) echo $puntos_usar ?>" size="30" /><br />
+              <input id="email" class="input" required name="puntos_usar" type="number" value="0" size="30" /><br />
               <span id="email_validation" class="error_message"></span>
             </div>
 
 
             <input id="submit_button-agregar" type="submit" name="Agregar" value="Agregar compra" />
-            <?php
+           
 
-            $cedula = 0;
-            if (isset($_POST['cedula_buscar'])) {
-              $cedula = $_POST['cedula_buscar'];
-            }
-
-            $monto = 0;
-            $puntos_usar = 0;
-            if (isset($_POST['monto'])) {
-              $monto = $_POST['monto'];
-              $monto = (int) $monto;
-            }
-            $cedula = (int) $cedula;
-
-            $constPunto = 55;
-
-
-            $consulta = "SELECT * FROM clientes WHERE id='$cedula'";
-            $ejecutar = mysqli_query($conn, $consulta);
-            $verFilas = mysqli_num_rows($ejecutar);
-            $fila = mysqli_fetch_array($ejecutar);
-            if (isset($_POST['puntos_usar'])) {
-              $puntos_usar  = $_POST['puntos_usar'];
-            }
-
-            $montofinal = $monto - ($puntos_usar * $constPunto);
-
-            $resultadototal = $fila[6] + $montofinal;
-            $comprastales = $fila[4] + 1;
-            $puntosdelcliente = $fila[5];
-            if($fila[5]==nulL){
-              $puntosdelcliente=0;
-            }
-            $totalpuntos = $puntosdelcliente - $puntos_usar;
-
-            $puntosAsumar = ($montofinal * 1) / 1000;
-
-            $puntosfinales = $totalpuntos + $puntosAsumar;
-            #RODEONDEO PARA LOS PUNTOS 
-            round($puntosAsumar, 0, PHP_ROUND_HALF_UP);
-
-          
-
-            $agregar = "UPDATE clientes SET total='$resultadototal', cantidadCompras='$comprastales',puntos='$puntosfinales' WHERE id='$cedula'";
-            if (!isset($_POST['Agregar'])) {
-            } else {
-              
-              //validacion para que el usuario no use mas puntos de los que no tiene
-              if ($puntosdelcliente >= $puntos_usar) {
-                $resultado = mysqli_query($conn, $agregar);
-                echo "<script>alert('Compra exitosa'); 
-                </script>";
-              } else {
-                echo "<script>alert('Los puntos a usar son mayores a los puntos del cliente'); 
-                </script>";
-              }
-
-              //no mas botones porfavor
-            }
-            #Solo para dos botones
-
-            ?>
-
-            <form method="POST" class>
-              <input id="submit_button" type="submit" value="Canjear" />
-              <?php
-
-              if ($puntosdelcliente >= $puntos_usar) {
-                echo '
-  <table class="comprar">
-  <th>total</th>
-  <td>' . $monto . '</td>
-  <th>puntos</th>
-  <td>' . $puntos_usar . '</td>
-  <th>total</th>
-  <td>' . $montofinal . '</td></table>
-  ';
-              } else {
-                echo "<script>alert('Los puntos a usar son mayores a los puntos del cliente'); 
-</script>";
-              }
-
-
-
-              ?>
-            </form>
+            
           </form>
         </div>
 
