@@ -29,6 +29,7 @@ $comprastales=0;
 $puntosdelcliente=$fila[5];
 $bono = 0;
 $resultadototal = 0;
+$validacion = 0;
 
 $agregar = "UPDATE clientes SET total='$montofinal', cantidadCompras='$comprastales',puntos='$puntosfinales' WHERE id='$cedula'";
 if (!isset($_POST['Agregar'])) {
@@ -43,7 +44,6 @@ if (!isset($_POST['Agregar'])) {
     window.location='/Diego/index.php#second';</script>";
 
   }
-
 
 
   //validacion para que el usuario no use mas puntos de los que no tiene
@@ -74,6 +74,17 @@ if (!isset($_POST['Agregar'])) {
     if ($puntos_usar == 15) {
 
       $bono = 10000;
+      $validacion = $monto - $bono;
+      if($validacion < 0){
+
+        echo "<script>alert(' ERROR: -el bono es mayor al total de la compra '); 
+        </script>";
+        echo "<script>
+        window.location='/Diego/index.php#second';</script>";
+
+      } else {
+
+        
       $monto = $monto - $bono;
 
       $puntosdelcliente = $fila[5];
@@ -97,9 +108,23 @@ if (!isset($_POST['Agregar'])) {
       echo "<script>
       window.location='/Diego/index.php#second';</script>";
     
+
+      }
   }else if($puntos_usar == 25) {
 
+
     $bono = 20000;
+    $validacion = $monto - $bono;
+    if($validacion < 0){
+
+      echo "<script>alert(' ERROR: -el bono es mayor al total de la compra '); 
+      </script>";
+      echo "<script>
+      window.location='/Diego/index.php#second';</script>";
+
+    } else {
+
+      
     $monto = $monto - $bono;
 
     $puntosdelcliente = $fila[5];
@@ -123,9 +148,22 @@ if (!isset($_POST['Agregar'])) {
     echo "<script>
     window.location='/Diego/index.php#second';</script>";
   
-  }else if ($puntos_usar == 35) {
+    } 
+  }else if($puntos_usar == 35) {
+
 
     $bono = 30000;
+    $validacion = $monto - $bono;
+    if($validacion < 0){
+
+      echo "<script>alert(' ERROR: -el bono es mayor al total de la compra '); 
+      </script>";
+      echo "<script>
+      window.location='/Diego/index.php#second';</script>";
+
+    } else {
+
+      
     $monto = $monto - $bono;
 
     $puntosdelcliente = $fila[5];
@@ -149,7 +187,8 @@ if (!isset($_POST['Agregar'])) {
     echo "<script>
     window.location='/Diego/index.php#second';</script>";
   
-  } else if ($puntos_usar != 15 || $puntos_usar != 25 || $puntos_usar != 35) {
+      } 
+  }else if ($puntos_usar != 15 || $puntos_usar != 25 || $puntos_usar != 35) {
     echo "<script>alert('no estas canjeando correctamente el bono'); </script>";
     echo "<script>
     window.location='/Diego/index.php#second';</script>";

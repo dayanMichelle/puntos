@@ -43,19 +43,19 @@
         <div class="row">
           <label class="required" for="name">Nombre completo:</label><br />
           <input id="name" class="input" value="<?php
-                                                if (isset($cedula)) echo $cedula ?>" required name="nombre" type="text" value="" size="30" /><br />
+                                                if (isset($nombre)) echo $nombre ?>" required name="nombre" type="text" value="" size="30" /><br />
           <span id="name_validation" class="error_message"></span>
         </div>
         <div class="row">
           <label class="required" for="email">email:</label><br />
           <input id="email" class="input" value="<?php
-                                                  if (isset($cedula)) echo $cedula ?>" name="email" required type="text" value="" size="30" /><br />
+                                                  if (isset($email)) echo $email ?>" name="email" required type="text" value="" size="30" /><br />
           <span id="email_validation" class="error_message"></span>
         </div>
         <div class="row">
           <label class="required" for="email">Numero:</label><br />
           <input id="numero" class="input" value="<?php
-                                                  if (isset($cedula)) echo $cedula ?>" name="numero" required type="text" value="" size="" /><br />
+                                                  if (isset($nombre)) echo $nombre ?>" name="numero" required type="text" value="" size="" /><br />
           <span id="email_validation" class="error_message"></span>
         </div>
 

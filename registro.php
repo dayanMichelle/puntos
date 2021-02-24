@@ -5,9 +5,11 @@ $nombre =$_POST["nombre"];
 $id =$_POST["cedula"];
 $email =$_POST["email"];
 $numero =$_POST["numero"];
-
-$insertar = "INSERT INTO clientes (id,nombre,numero,correo)
-VALUES ('$id','$nombre','$numero','$email')";
+$cantidadCompras =0;
+$total=0;
+$puntos=0;
+$insertar = "INSERT INTO clientes (id,nombre,numero,correo,cantidadCompras,puntos,total)
+VALUES ('$id','$nombre','$numero','$email','$cantidadCompras','$puntos','$total')";
 
 
 
